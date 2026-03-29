@@ -7,6 +7,65 @@
 		<!-- <script src="https://unpkg.com/@softeng-761-2025-team-10/aframe-inspector/dist/aframe-inspector.min.js"></script> -->
 		<script src="http://localhost:5173/vendor/aframe-inspector/aframe-inspector.js"></script>
 		
+		<script>
+			// User permissions for A-Frame Inspector
+			window.AFRAME_SCENE_PERMISSIONS = {
+				userRole: "editor",
+				canEdit: true,
+				isPublic: false,
+				viewOnly: false
+			};
+			
+			// Configure A-Frame Inspector based on permissions
+			window.AFRAME_INSPECTOR_CONFIG = {
+				copyCameraPosition: true,
+				viewOnly: false
+			};
+			
+			// For viewers, inspector script is not loaded, so just provide user feedback
+			if (false) {
+				// Block keyboard shortcuts and show message
+				document.addEventListener('keydown', function(evt) {
+					const shortcutPressed = evt.keyCode === 73 && 
+						((evt.ctrlKey && evt.altKey) || evt.getModifierState('AltGraph'));
+					if (shortcutPressed) {
+						evt.preventDefault();
+						evt.stopPropagation();
+						showViewerMessage();
+						return false;
+					}
+				}, true);
+				
+				function showViewerMessage() {
+					// Create a temporary notification
+					const notification = document.createElement('div');
+					notification.style.cssText = `
+						position: fixed;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						background: rgba(255, 152, 0, 0.95);
+						color: white;
+						padding: 20px 30px;
+						border-radius: 8px;
+						font-family: Arial, sans-serif;
+						font-size: 16px;
+						z-index: 999999;
+						text-align: center;
+						box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+					`;
+					notification.innerHTML = '🔒 Inspector Not Available<br><small>You have view-only access to this scene</small>';
+					document.body.appendChild(notification);
+					
+					// Remove notification after 3 seconds
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 3000);
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<a-scene>
@@ -17,12 +76,15 @@
       <a-cylinder name="Cylinder" color="#4CC3D9" radius="1" height="1" position="-2.74115 1 -3" id="A-CYLINDER-1" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: false; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: standard; side: front; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; ambientOcclusionMap: ; ambientOcclusionMapIntensity: 1; ambientOcclusionTextureOffset: [object Object]; ambientOcclusionTextureRepeat: [object Object]; color: #4CC3D9; displacementMap: ; displacementScale: 1; displacementBias: 0.5; displacementTextureOffset: [object Object]; displacementTextureRepeat: [object Object]; emissive: #000; emissiveIntensity: 1; envMap: ; fog: true; metalness: 0; metalnessMap: ; metalnessTextureOffset: [object Object]; metalnessTextureRepeat: [object Object]; normalMap: ; normalScale: [object Object]; normalTextureOffset: [object Object]; normalTextureRepeat: [object Object]; roughness: 0.5; roughnessMap: ; roughnessTextureOffset: [object Object]; roughnessTextureRepeat: [object Object]; sphericalEnvMap: ; src: ; wireframe: false; wireframeLinewidth: 2" geometry="buffer: true; primitive: cylinder; skipCache: false; height: 1; openEnded: false; radius: 1; segmentsHeight: 18; segmentsRadial: 36; thetaLength: 360; thetaStart: 0"></a-cylinder>
       <a-torus name="Donut" position="0 2.91736 -3" id="A-TORUS-1" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: false; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: standard; side: front; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; ambientOcclusionMap: ; ambientOcclusionMapIntensity: 1; ambientOcclusionTextureOffset: [object Object]; ambientOcclusionTextureRepeat: [object Object]; color: #4ECDC4; displacementMap: ; displacementScale: 1; displacementBias: 0.5; displacementTextureOffset: [object Object]; displacementTextureRepeat: [object Object]; emissive: #000; emissiveIntensity: 1; envMap: ; fog: true; metalness: 0; metalnessMap: ; metalnessTextureOffset: [object Object]; metalnessTextureRepeat: [object Object]; normalMap: ; normalScale: [object Object]; normalTextureOffset: [object Object]; normalTextureRepeat: [object Object]; roughness: 0.5; roughnessMap: ; roughnessTextureOffset: [object Object]; roughnessTextureRepeat: [object Object]; sphericalEnvMap: ; src: ; wireframe: false; wireframeLinewidth: 2" geometry="buffer: true; primitive: torus; skipCache: false; arc: 360; radius: 0.5; radiusTubular: 0.1; segmentsRadial: 36; segmentsTubular: 32"></a-torus>
       <a-cylinder name="Cylinder" position="2.26861 1.92808 -3" id="A-CYLINDER-2" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: false; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: standard; side: front; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; ambientOcclusionMap: ; ambientOcclusionMapIntensity: 1; ambientOcclusionTextureOffset: [object Object]; ambientOcclusionTextureRepeat: [object Object]; color: #FFC65D; displacementMap: ; displacementScale: 1; displacementBias: 0.5; displacementTextureOffset: [object Object]; displacementTextureRepeat: [object Object]; emissive: #000; emissiveIntensity: 1; envMap: ; fog: true; metalness: 0; metalnessMap: ; metalnessTextureOffset: [object Object]; metalnessTextureRepeat: [object Object]; normalMap: ; normalScale: [object Object]; normalTextureOffset: [object Object]; normalTextureRepeat: [object Object]; roughness: 0.5; roughnessMap: ; roughnessTextureOffset: [object Object]; roughnessTextureRepeat: [object Object]; sphericalEnvMap: ; src: ; wireframe: false; wireframeLinewidth: 2" geometry="buffer: true; primitive: cylinder; skipCache: false; height: 1.5; openEnded: false; radius: 0.5; segmentsHeight: 18; segmentsRadial: 36; thetaLength: 360; thetaStart: 0"></a-cylinder>
+      <a-plane id="ground" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: false; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: standard; side: front; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; ambientOcclusionMap: ; ambientOcclusionMapIntensity: 1; ambientOcclusionTextureOffset: [object Object]; ambientOcclusionTextureRepeat: [object Object]; color: #7BC8A4; displacementMap: ; displacementScale: 1; displacementBias: 0.5; displacementTextureOffset: [object Object]; displacementTextureRepeat: [object Object]; emissive: #000; emissiveIntensity: 1; envMap: ; fog: true; metalness: 0; metalnessMap: ; metalnessTextureOffset: [object Object]; metalnessTextureRepeat: [object Object]; normalMap: ; normalScale: [object Object]; normalTextureOffset: [object Object]; normalTextureRepeat: [object Object]; roughness: 0.5; roughnessMap: ; roughnessTextureOffset: [object Object]; roughnessTextureRepeat: [object Object]; sphericalEnvMap: ; src: ; wireframe: false; wireframeLinewidth: 2" geometry="buffer: true; primitive: plane; skipCache: false; height: 4; width: 4; segmentsHeight: 1; segmentsWidth: 1"></a-plane>
+      <a-sky id="sky" color="#ECECEC" scale="-1 1 1" position="0 34.54098 0" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: true; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: flat; side: back; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; color: #ECECEC; fog: true; src: ; wireframe: false; wireframeLinewidth: 2; toneMapped: true" geometry="buffer: true; primitive: sphere; skipCache: false; radius: 500; phiLength: 360; phiStart: 0; thetaLength: 180; thetaStart: 0; segmentsHeight: 32; segmentsWidth: 64"></a-sky>
+      <a-text value="Edit me" color="#FFF" width="4" align="center" position="-0.013236297462694812 1.6 -0.039999880000360005" id="TEXT-2" text=""></a-text>
       <a-text name="Text" value="Edit me" color="#FFF" width="4" align="center" position="-0.01324 1.60903 -0.04" id="A-TEXT-3" text="anchor: align; width: 4; value: Edit me; color: #FFF; align: center"></a-text>
       <a-text name="Text" value="Edit me" color="#FFF" width="4" align="center" position="-10.99562 6.08521 -0.04" id="TEXT-3" text="anchor: align; width: 4; value: Edit me; color: #FFF; align: center"></a-text>
-      <a-text value="Edit me" color="#FFF" width="4" align="center" position="-0.013236297462694812 1.6 -0.039999880000360005" id="TEXT-2" text=""></a-text>
+      <a-entity id="A-ENTITY-6" position="0 3.79992 -3" name="Rubber Duck" gltf-model="https://unpkg.com/@softeng-761-2025-team-10/aframe-inspector/assets/gltf/rubber_duck.glb" rotation="0 0 0" scale="0.72 1 1"></a-entity>
       <a-text value="Edit me" color="#FFF" width="4" align="center" position="2.846780049510793 1.6 14.550791894791997" id="A-TEXT-5" text=""></a-text>
       <a-text name="Text" value="Edit me" color="#FFF" width="4" align="center" position="2.846780049510793 1.6 14.550791894791997" id="A-TEXT-6" text=""></a-text>
-      <a-entity name="Desert Buggy" gltf-model="https://unpkg.com/@softeng-761-2025-team-10/aframe-inspector/assets/gltf/desert_buggy.glb" position="0 0 -3" rotation="0 0 0" scale="0.5 0.5 0.5" id="A-ENTITY-7"></a-entity>
+      <a-entity name="Desert Buggy" gltf-model="https://unpkg.com/@softeng-761-2025-team-10/aframe-inspector/assets/gltf/desert_buggy.glb" position="-68.65625 0 -3" rotation="0 0 0" scale="0.5 0.5 0.5" id="A-ENTITY-7"></a-entity>
 			<a-plane
 				id="ground"
 				position="0 0 -4"
