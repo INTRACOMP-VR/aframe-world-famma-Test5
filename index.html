@@ -8,7 +8,69 @@
 		<!-- <script src="https://unpkg.com/@softeng-761-2025-team-10/aframe-inspector/dist/aframe-inspector.min.js"></script> -->
 		<script src="http://localhost:5173/vendor/aframe-inspector/aframe-inspector.js"></script>
 		
+		<script>
+			window.INTRACOMP_API_BASE_URL = "http://localhost:3000";
+		</script>
 		
+		<script>
+			// User permissions for A-Frame Inspector
+			window.AFRAME_SCENE_PERMISSIONS = {
+				userRole: "owner",
+				canEdit: true,
+				isPublic: false,
+				viewOnly: false
+			};
+			
+			// Configure A-Frame Inspector based on permissions
+			window.AFRAME_INSPECTOR_CONFIG = {
+				copyCameraPosition: true,
+				viewOnly: false
+			};
+			
+			// For viewers, inspector script is not loaded, so just provide user feedback
+			if (false) {
+				// Block keyboard shortcuts and show message
+				document.addEventListener('keydown', function(evt) {
+					const shortcutPressed = evt.keyCode === 73 && 
+						((evt.ctrlKey && evt.altKey) || evt.getModifierState('AltGraph'));
+					if (shortcutPressed) {
+						evt.preventDefault();
+						evt.stopPropagation();
+						showViewerMessage();
+						return false;
+					}
+				}, true);
+				
+				function showViewerMessage() {
+					// Create a temporary notification
+					const notification = document.createElement('div');
+					notification.style.cssText = `
+						position: fixed;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						background: rgba(255, 152, 0, 0.95);
+						color: white;
+						padding: 20px 30px;
+						border-radius: 8px;
+						font-family: Arial, sans-serif;
+						font-size: 16px;
+						z-index: 999999;
+						text-align: center;
+						box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+					`;
+					notification.innerHTML = '🔒 Inspector Not Available<br><small>You have view-only access to this scene</small>';
+					document.body.appendChild(notification);
+					
+					// Remove notification after 3 seconds
+					setTimeout(() => {
+						if (notification.parentNode) {
+							notification.parentNode.removeChild(notification);
+						}
+					}, 3000);
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<a-scene>
@@ -33,11 +95,13 @@
       <a-text name="Text" value="Edit me" color="#FFF" width="4" align="center" position="-1.2823666477722209 1.6 -1.619624839707155" id="A-TEXT-10" text=""></a-text>
       <a-text value="Edit me" color="#FFF" width="4" align="center" position="-1.2824253392051443 1.6 -1.6029126424918838" id="A-TEXT-11" text=""></a-text>
       <a-text name="Text" value="Edit me" color="#FFF" width="4" align="center" position="-1.2824253392051443 1.6 -1.6029126424918838" id="A-TEXT-12" text=""></a-text>
-      <a-gltf-model name="chicken_gun_mistytown" gltf-model="/api/assets/8b6f160dab17918341f964f81006db41750213ec2af342a2cd4fa7be63c57ab1.glb" position="0 1.6 -2" id="A-GLTF-MODEL-2"></a-gltf-model>
-      <a-gltf-model name="chicken_gun_mistytown" gltf-model="/api/assets/ecd79ec4a0e1f3b77da7ca65c7fab89f3224a7152edd0888de5f78a9d60dfd23.glb" position="0 1.6 -2" id="A-GLTF-MODEL-3"></a-gltf-model>
-      <a-entity name="Barramundi Fish" gltf-model="/vendor/aframe-inspector/assets/gltf/barramundi_fish.glb" position="0 2.39557 -3.24159" rotation="0 0 0" scale="" id="A-ENTITY-9"></a-entity>
-			<a-plane id="ground" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-			<a-sky id="sky" color="#ECECEC"></a-sky>
+      <a-gltf-model name="chicken_gun_mistytown" gltf-model="http://localhost:3000/api/assets/8b6f160dab17918341f964f81006db41750213ec2af342a2cd4fa7be63c57ab1.glb" position="0 1.6 -2" id="A-GLTF-MODEL-2"></a-gltf-model>
+      <a-gltf-model name="chicken_gun_mistytown" gltf-model="http://localhost:3000/api/assets/ecd79ec4a0e1f3b77da7ca65c7fab89f3224a7152edd0888de5f78a9d60dfd23.glb" position="0 1.6 -2" id="A-GLTF-MODEL-3"></a-gltf-model>
+      <a-plane id="ground" position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: false; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: standard; side: front; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; ambientOcclusionMap: ; ambientOcclusionMapIntensity: 1; ambientOcclusionTextureOffset: [object Object]; ambientOcclusionTextureRepeat: [object Object]; color: #7BC8A4; displacementMap: ; displacementScale: 1; displacementBias: 0.5; displacementTextureOffset: [object Object]; displacementTextureRepeat: [object Object]; emissive: #000; emissiveIntensity: 1; envMap: ; fog: true; metalness: 0; metalnessMap: ; metalnessTextureOffset: [object Object]; metalnessTextureRepeat: [object Object]; normalMap: ; normalScale: [object Object]; normalTextureOffset: [object Object]; normalTextureRepeat: [object Object]; roughness: 0.5; roughnessMap: ; roughnessTextureOffset: [object Object]; roughnessTextureRepeat: [object Object]; sphericalEnvMap: ; src: ; wireframe: false; wireframeLinewidth: 2" geometry="buffer: true; primitive: plane; skipCache: false; height: 4; width: 4; segmentsHeight: 1; segmentsWidth: 1"></a-plane>
+      <a-sky id="sky" color="#ECECEC" scale="-1 1 1" material="alphaTest: 0; depthTest: true; depthWrite: true; flatShading: false; npot: true; offset: [object Object]; opacity: 1; repeat: [object Object]; shader: flat; side: back; transparent: false; vertexColorsEnabled: false; visible: true; blending: normal; dithering: true; anisotropy: 0; color: #ECECEC; fog: true; src: ; wireframe: false; wireframeLinewidth: 2; toneMapped: true" geometry="buffer: true; primitive: sphere; skipCache: false; radius: 500; phiLength: 360; phiStart: 0; thetaLength: 180; thetaStart: 0; segmentsHeight: 32; segmentsWidth: 64"></a-sky>
+      <a-entity name="Barramundi Fish" gltf-model="/vendor/aframe-inspector/assets/gltf/barramundi_fish.glb" position="-2.09583 2.39557 -3.24159" rotation="0 0 0" scale="" id="A-ENTITY-9"></a-entity>
+			
+			
 		</a-scene>
 	</body>
 </html>
